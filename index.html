@@ -11,19 +11,22 @@
                 <th>Наименование</th>
                 <th>Количество</th>
                 <th>Цена</th>
-                <th v-on:click="addRow()">+</th>
+                <th>
+                    <button v-on:click="addRow()">+</button>
+                </th>
             </tr>
             <tr v-for="(item, index) in items">
                 <td><input type="text" v-model="item.name"></td>
                 <td><input type="text" v-model="item.num"></td>
                 <td><input type="text" v-model="item.price"></td>
-                <td v-on:click="deleteRow(index)">X</td>
+                <td>
+                    <button v-on:click="deleteRow(index)">X</button>
+                </td>
             </tr>
             <tr>
                 <td colspan="2">Итог:</td>
                 <td>{{ summ }}</td>
             </tr>
-            
         </table>
 
 
