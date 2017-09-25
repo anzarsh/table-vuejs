@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>table-vuejs</title>
+    </head>
+    <body>
+        
+        <table id="table">
+            <tr>
+                <th>Наименование</th>
+                <th>Количество</th>
+                <th>Цена</th>
+                <th v-on:click="addRow()">+</th>
+            </tr>
+            <tr v-for="(item, index) in items">
+                <td><input type="text" v-model="item.name"></td>
+                <td><input type="text" v-model="item.num"></td>
+                <td><input type="text" v-model="item.price"></td>
+                <td v-on:click="deleteRow(index)">X</td>
+            </tr>
+            <tr>
+                <td colspan="2">Итог:</td>
+                <td>{{ summ }}</td>
+            </tr>
+            
+        </table>
+
+
+        <script src="https://unpkg.com/vue"></script>
+        <script>
+            var app = new Vue({
+                el: '#table',
+                data: {
+                    items: [
+                        {
+                            name : "Мышь",
+                            num : 20,
+                            price : 500
+                        },
+                        {
+                            name : "Клавиатура",
+                            num : 10,
+                            price : 1000
+                        },
+                        {
+                            name : "Микрофон",
+                            num : 15,
+                            price : 300
+                        }
+                    ]
+                },
+                methods: {
+                    deleteRow : function(index) {
+                        this.items.splice(index, 1);
+                    },
+                    addRow : function() {
+                        this.items.push({
+                            name : "",
+                            num : 0,
+                            price : 0
+                        });
+                    }
+                },
+                computed: {
+                    summ : function() {
+                        var sum = 0;
+                        for (var i in this.items) {
+                            sum += this.items[i].num * this.items[i].price;
+                        }
+                        return sum;
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
